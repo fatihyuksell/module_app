@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
-import 'package:module_app/common/widgets/reusable_app_bar.dart';
+import 'package:module_app/common/reusable_app_bar.dart';
 
 class SplashView extends StatefulWidget {
   const SplashView({super.key});
@@ -42,7 +42,9 @@ class _SplashViewState extends State<SplashView>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const ReusableAppBar(),
+      appBar: const ReusableAppBar(
+        exitMode: true,
+      ),
       body: SafeArea(
         child: Center(
           child: Column(
@@ -96,8 +98,10 @@ class _SplashViewState extends State<SplashView>
               const SizedBox(height: 30),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).pushNamed('/details',
-                      arguments: {'id': Random().nextInt(100).toString()});
+                  Navigator.of(context).pushNamed(
+                    '/details',
+                    arguments: {'id': Random().nextInt(100).toString()},
+                  );
                 },
                 style: ElevatedButton.styleFrom(
                   backgroundColor: Colors.blue,

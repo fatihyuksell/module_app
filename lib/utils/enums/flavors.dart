@@ -6,4 +6,8 @@ enum Flavors {
   final String value;
 
   const Flavors(this.value);
+
+  static Flavors fromString(String value) {
+    return Flavors.values.firstWhere((e) => e.value == value);
+  }
 }

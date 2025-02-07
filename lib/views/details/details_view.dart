@@ -2,7 +2,7 @@ import 'dart:math';
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
-import 'package:module_app/common/widgets/reusable_app_bar.dart';
+import 'package:module_app/common/reusable_app_bar.dart';
 
 class DetailsView extends StatefulWidget {
   final String? id;
@@ -60,7 +60,6 @@ class _DetailsViewState extends State<DetailsView> {
           spots.add(FlSpot(lastX, newValue));
           lastX += 0.5;
 
-          // Son değerleri kaydet
           recentValues.insert(0, newValue);
           if (recentValues.length > maxRecentValues) {
             recentValues.removeLast();
@@ -74,7 +73,6 @@ class _DetailsViewState extends State<DetailsView> {
             lastX = spots.last.x;
           }
 
-          // Her 20 güncelleme de bir renk değişimi
           if (updateCount % 20 == 0) {
             currentColorIndex = (currentColorIndex + 1) % gradientColors.length;
           }
@@ -104,7 +102,6 @@ class _DetailsViewState extends State<DetailsView> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // Üst bilgi kartları
               Row(
                 children: [
                   Expanded(
@@ -133,8 +130,6 @@ class _DetailsViewState extends State<DetailsView> {
                 ],
               ),
               const SizedBox(height: 20),
-
-              // Son değerler listesi
               SizedBox(
                 height: 60,
                 child: ListView.builder(
@@ -162,10 +157,7 @@ class _DetailsViewState extends State<DetailsView> {
                   },
                 ),
               ),
-
               const SizedBox(height: 20),
-
-              // Ana grafik
               Expanded(
                 child: LineChart(
                   LineChartData(
@@ -238,8 +230,6 @@ class _DetailsViewState extends State<DetailsView> {
                   duration: const Duration(milliseconds: 0),
                 ),
               ),
-
-              // Bilgilendirme widget'ı
               Container(
                 margin: const EdgeInsets.only(top: 16),
                 padding: const EdgeInsets.all(12),

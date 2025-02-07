@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:module_app/views/details/details_view.dart';
-import 'package:module_app/views/home/home_view.dart';
 import 'package:module_app/views/splash/splash_view.dart';
 
 class RouteUtil {
@@ -13,10 +12,6 @@ class RouteUtil {
       case '/splash':
         return MaterialPageRoute(
           builder: (context) => const SplashView(),
-        );
-      case '/home':
-        return MaterialPageRoute(
-          builder: (context) => const HomeView(),
         );
       case '/details':
         final args = settings.arguments as Map<String, dynamic>?;

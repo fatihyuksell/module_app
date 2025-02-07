@@ -1,20 +1,28 @@
-final class NativeCommunicationCredentialModel {
+class NativeCommunicationCredentialModel {
   final String token;
   final String refreshToken;
   final String userId;
+  final String flavor;
 
-  const NativeCommunicationCredentialModel({
+  NativeCommunicationCredentialModel({
     required this.token,
     required this.refreshToken,
     required this.userId,
+    required this.flavor,
   });
 
   factory NativeCommunicationCredentialModel.fromJson(
       Map<String, dynamic> json) {
-    return NativeCommunicationCredentialModel(
-      token: json['token'],
-      refreshToken: json['refreshToken'],
-      userId: json['userId'],
-    );
+    try {
+      return NativeCommunicationCredentialModel(
+        token: json['token']?.toString() ?? '',
+        refreshToken: json['refreshToken']?.toString() ?? '',
+        userId: json['userId']?.toString() ?? '',
+        flavor: json['flavor']?.toString() ?? 'dev',
+      );
+    } catch (e) {
+      print('Model parsing error: $e');
+      rethrow;
+    }
   }
 }

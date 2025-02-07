@@ -1,11 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:module_app/services/local/native_communication_service.dart';
 
 class ReusableAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
+  final bool exitMode;
 
   const ReusableAppBar({
     super.key,
     this.title,
+    this.exitMode = false,
   });
 
   @override
@@ -13,11 +16,15 @@ class ReusableAppBar extends StatelessWidget implements PreferredSizeWidget {
     final bool canPop = Navigator.canPop(context);
 
     return AppBar(
-      leading: canPop
+      leading: canPop || exitMode
           ? GestureDetector(
-              onTap: () => Navigator.pop(context),
-              child: const Icon(
-                Icons.arrow_back_ios_new,
+              onTap: canPop
+                  ? () => Navigator.pop(context)
+                  : exitMode
+                      ? () => NativeCommunicationService.instance.exit()
+                      : null,
+              child: Icon(
+                exitMode ? Icons.exit_to_app_rounded : Icons.arrow_back_ios_new,
                 color: Colors.white,
               ),
             )
