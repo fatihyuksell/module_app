@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/services.dart';
 import 'package:module_app/models/native_communication_credential_model.dart';
 import 'package:module_app/utils/enums/method_names.dart';
@@ -20,11 +22,10 @@ class NativeCommunicationService {
 
       if (result == null) return null;
 
-      // Native'den gelen Map'i doğru formata dönüştür
       final Map<String, dynamic> credentials = (result as Map<Object?, Object?>)
           .map((key, value) => MapEntry(key.toString(), value));
 
-      print('Received credentials: $credentials'); // Debug için
+      print('Received credentials: $credentials');
 
       return NativeCommunicationCredentialModel.fromJson(credentials);
     } on PlatformException catch (e) {

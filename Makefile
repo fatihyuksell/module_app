@@ -10,6 +10,9 @@ copy-kernel-blob:
 	cp output/ios/Debug/App.xcframework/ios-arm64_x86_64-simulator/App.framework/flutter_assets/kernel_blob.bin \
 	   output/ios/Release/App.xcframework/ios-arm64_x86_64-simulator/App.framework/flutter_assets/
 
+clean-dsym:
+	rm -rf output/ios/Release/App.xcframework/ios-arm64/dSYMs/Flutter.framework.dSYM
+	
 copy-app-files:
 	rm -rf output/ios/Release/App.xcframework
 	cp -R output/ios/Debug/App.xcframework output/ios/Release/
@@ -19,8 +22,6 @@ clean-replace-sources:
 	find ../spm/Sources/ -mindepth 1 ! -path '../spm/Sources/spm' ! -path '../spm/Sources/spm/spm.swift' -exec rm -rf {} +
 	cp -rf output/ios/Release/* ../spm/Sources/
 
-clean-dsym:
-	rm -rf output/ios/Release/App.xcframework/ios-arm64/dSYMs/Flutter.framework.dSYM
 	
 asset:
 	cd scripts && fvm dart gen_assets.dart
